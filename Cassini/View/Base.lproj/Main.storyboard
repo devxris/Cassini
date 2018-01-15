@@ -18,16 +18,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ICF-kE-mEP">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cs8-SR-6Mc">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="812" translatesAutoresizingMaskIntoConstraints="NO" id="ICF-kE-mEP">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ICF-kE-mEP" firstAttribute="leading" secondItem="Cs8-SR-6Mc" secondAttribute="leading" id="3SB-bi-xpN"/>
+                                    <constraint firstItem="ICF-kE-mEP" firstAttribute="top" secondItem="Cs8-SR-6Mc" secondAttribute="top" id="8Z1-dq-9j7"/>
+                                    <constraint firstItem="ICF-kE-mEP" firstAttribute="bottom" secondItem="Cs8-SR-6Mc" secondAttribute="bottom" id="NpH-UP-Nc9"/>
+                                    <constraint firstItem="ICF-kE-mEP" firstAttribute="trailing" secondItem="Cs8-SR-6Mc" secondAttribute="trailing" id="vub-bU-lCc"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ICF-kE-mEP" firstAttribute="top" secondItem="G8L-Kr-Pvx" secondAttribute="top" id="5Gj-EH-u9b"/>
-                            <constraint firstItem="ICF-kE-mEP" firstAttribute="leading" secondItem="G8L-Kr-Pvx" secondAttribute="leading" id="Bfi-gW-VN1"/>
-                            <constraint firstItem="ICF-kE-mEP" firstAttribute="bottom" secondItem="G8L-Kr-Pvx" secondAttribute="bottom" id="tN0-vF-GR8"/>
-                            <constraint firstItem="ICF-kE-mEP" firstAttribute="trailing" secondItem="G8L-Kr-Pvx" secondAttribute="trailing" id="uMt-Sc-5IE"/>
+                            <constraint firstItem="Cs8-SR-6Mc" firstAttribute="top" secondItem="G8L-Kr-Pvx" secondAttribute="top" id="6ze-vo-65H"/>
+                            <constraint firstItem="Cs8-SR-6Mc" firstAttribute="trailing" secondItem="G8L-Kr-Pvx" secondAttribute="trailing" id="8ER-ul-3zN"/>
+                            <constraint firstItem="Cs8-SR-6Mc" firstAttribute="bottom" secondItem="G8L-Kr-Pvx" secondAttribute="bottom" id="UPy-wX-MEW"/>
+                            <constraint firstItem="Cs8-SR-6Mc" firstAttribute="leading" secondItem="G8L-Kr-Pvx" secondAttribute="leading" id="XN9-ZS-Ugg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vdm-sN-Yne"/>
                     </view>

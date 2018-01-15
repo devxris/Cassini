@@ -35,6 +35,12 @@ class ImageViewController: UIViewController {
 
 	// MARK: Storyboard
 	
+	/* Embedded imageView to scrollView in storyboard
+		1. scrollView will inset 20 points for each size
+		2. constrain to scrollView's contentSize
+		3. change imageView intrinsic size to placeholder
+	*/
+	
 	@IBOutlet weak var imageView: UIImageView!
 	
 	// MARK: Private funcs
