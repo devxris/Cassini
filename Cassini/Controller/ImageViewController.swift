@@ -46,6 +46,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
 			imageView.sizeToFit()
 			// must hook up with scrollView's contentSize, which is nil before outlet is set
 			scrollView?.contentSize = imageView.frame.size
+			spinner?.stopAnimating() // stop spinner right after image is set
 		}
 	}
 
@@ -69,6 +70,8 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
 		}
 	}
 	
+	@IBOutlet weak var spinner: UIActivityIndicatorView!
+	
 	// MARK: UIScrollViewDelegate
 	
 	func viewForZooming(in scrollView: UIScrollView) -> UIView? { return imageView }
@@ -77,6 +80,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
 	
 	private func fetchImage() {
 		if let url = imageURL { // get data through network or file
+			spinner.startAnimating()
 			// weak self here not to prevent memory cycle but prevent network is too time-consuming
 			DispatchQueue.global(qos: .userInitiated).async { [weak self] in
 				let urlContents = try? Data(contentsOf: url) // better to use do-catch block, also blocks the main queue
