@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImageViewController: UIViewController {
+class ImageViewController: UIViewController, UIScrollViewDelegate {
 	
 	// MARK: Model
 	
@@ -51,7 +51,7 @@ class ImageViewController: UIViewController {
 	// MARK: Storyboard
 	
 	/* Embedded imageView to scrollView in storyboard
-		1. scrollView will inset 20 points for each size
+		1. scrollView will inset 20 points for each side automatically
 		2. constrain to scrollView's contentSize
 		3. change imageView intrinsic size to placeholder
 	*/
@@ -60,9 +60,17 @@ class ImageViewController: UIViewController {
 	
 	@IBOutlet weak var scrollView: UIScrollView! {
 		didSet {
+			// 2 mandates to pinch scroll view: min/maxZoomScale and viewForZooming delegate method
+			scrollView.minimumZoomScale = 1/25
+			scrollView.maximumZoomScale = 1.0
+			scrollView.delegate = self
 			scrollView.addSubview(imageView)
 		}
 	}
+	
+	// MARK: UIScrollViewDelegate
+	
+	func viewForZooming(in scrollView: UIScrollView) -> UIView? { return imageView }
 	
 	// MARK: Private funcs
 	
