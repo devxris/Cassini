@@ -32,6 +32,21 @@ class ImageViewController: UIViewController {
 		super.viewDidLoad()
 		if imageURL == nil { imageURL = DemoURLs.stanford }
 	}
+	
+	// MARK: Properties
+	
+	var imageView = UIImageView()
+	
+	private var image: UIImage? { // a computed property to access image rather than imageView.image
+		get {
+			return imageView.image
+		}
+		set {
+			imageView.image = newValue
+			imageView.sizeToFit()
+			scrollView.contentSize = imageView.frame.size // must hook up with scrollView's contentSize
+		}
+	}
 
 	// MARK: Storyboard
 	
@@ -41,7 +56,13 @@ class ImageViewController: UIViewController {
 		3. change imageView intrinsic size to placeholder
 	*/
 	
-	@IBOutlet weak var imageView: UIImageView!
+	/* Embedded imageView to scrollView in code */
+	
+	@IBOutlet weak var scrollView: UIScrollView! {
+		didSet {
+			scrollView.addSubview(imageView)
+		}
+	}
 	
 	// MARK: Private funcs
 	
@@ -49,7 +70,7 @@ class ImageViewController: UIViewController {
 		if let url = imageURL { // get data through network or file
 			let urlContents = try? Data(contentsOf: url)
 			if let imageData = urlContents {
-				imageView.image = UIImage(data: imageData)
+				image = UIImage(data: imageData)
 			}
 		}
 	}
