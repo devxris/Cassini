@@ -27,11 +27,11 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
 		if imageView.image == nil { fetchImage() }
 	}
 	
-	// for demo only
-	override func viewDidLoad() {
+	/* get url from Bundle.main.url()
+	override func viewDidLoad() { // for demo only
 		super.viewDidLoad()
 		if imageURL == nil { imageURL = DemoURLs.stanford }
-	}
+	} */
 	
 	// MARK: Properties
 	
@@ -44,7 +44,8 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
 		set {
 			imageView.image = newValue
 			imageView.sizeToFit()
-			scrollView.contentSize = imageView.frame.size // must hook up with scrollView's contentSize
+			// must hook up with scrollView's contentSize, which is nil before outlet is set
+			scrollView?.contentSize = imageView.frame.size
 		}
 	}
 
@@ -76,9 +77,14 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
 	
 	private func fetchImage() {
 		if let url = imageURL { // get data through network or file
-			let urlContents = try? Data(contentsOf: url)
-			if let imageData = urlContents {
-				image = UIImage(data: imageData)
+			// weak self here not to prevent memory cycle but prevent network is too time-consuming
+			DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+				let urlContents = try? Data(contentsOf: url) // better to use do-catch block, also blocks the main queue
+				DispatchQueue.main.async {
+					if let imageData = urlContents, url == self?.imageURL { // ensure loading url is demanding url
+						self?.image = UIImage(data: imageData)
+					}
+				}
 			}
 		}
 	}
